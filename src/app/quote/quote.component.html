@@ -1,14 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Quotes</title>
-  <base href="/">
+<!-- <app-form (emitQuote)="addQuote($event)"></app-form>
+<div *ngFor="let quote of quotes; let i=index">
+  <p appHighlight>
+      Quote:{{quote.quotestr}}
+    </p> -->
+  <!-- <app-details [quote]="quote"></app-details> -->
+  <div class="container-fluid" >
+    <h1>QUOTES</h1>
+    <img src="assets/images/like-dislike.png">
+  </div>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
-</html>
+  <app-form (emitQuote)="addQuote($event)"></app-form>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <hr>
+        <div  class="myQuote"*ngFor="let quote of quotes; let i=index">
+          <p appHighlight *ngIf="highestUpvote()===quote.upvotes && quote.upvotes>0">{{quote.quote}}</p>
+          <p  *ngIf="highestUpvote()!==quote.upvotes || quote.upvotes===0">{{quote.quote}}</p>
+          <app-details [quote]="quote"></app-details>
+
+          <!-- <hr size="50"> -->
+
+
+          <button class="btn btn-primary" (click)="upvote(i)">Upvote</button>
+          <button class="btn" (click)="downvote(i)">Downvote</button>
+          <button class="btn btn-danger" (click)="delQuote(i)">Delete</button>
+
+          <hr>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- </div> -->
