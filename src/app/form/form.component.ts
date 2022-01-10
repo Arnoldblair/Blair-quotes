@@ -1,32 +1,23 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { Quote} from '../quote';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Quote } from '../quote';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-quote-form',
+  templateUrl: './quote-form.component.html',
+  styleUrls: ['./quote-form.component.css']
 })
-export class FormComponent implements OnInit {
-  @Output() emitQuote= new EventEmitter()
-  quoteStr:string
-  quotePublisher:string
-  quoteAuthor:string
-  theQuote:any
+export class QuoteFormComponent implements OnInit {
 
-  submitQuote(  ){
-    this.theQuote= new Quote(this.quotePublisher,this.quoteAuthor,this.quoteStr)
-    this.quoteStr=''
-    this.quoteAuthor=''
-    this.quotePublisher=''
-    this.emitQuote.emit(this.theQuote)
+  newQuote = new Quote(0, "", "", "", 0, 0, new Date());
+  @Output() addQuote = new EventEmitter<Quote>();
+
+  submitQuote(){
+    this.addQuote.emit(this.newQuote);
   }
-
-
-
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

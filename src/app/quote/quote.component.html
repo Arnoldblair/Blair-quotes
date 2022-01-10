@@ -1,37 +1,37 @@
-<!-- <app-form (emitQuote)="addQuote($event)"></app-form>
-<div *ngFor="let quote of quotes; let i=index">
-  <p appHighlight>
-      Quote:{{quote.quotestr}}
-    </p> -->
-  <!-- <app-details [quote]="quote"></app-details> -->
-  <div class="container-fluid" >
-    <h1>QUOTES</h1>
-    <img src="assets/images/like-dislike.png">
-  </div>
+<div class="container">
+  <h1 class="text-center">Quotes Poster</h1>
+  <hr>
 
-  <app-form (emitQuote)="addQuote($event)"></app-form>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="text-center">Quotes</h2>
+      
+      <div *ngFor="let quote of quotes; let i=index">
+        <div id="{{i}}">
+          <p>{{quote.quote}}</p>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <button class="btn btn-outline-primary" (click)="upvoteQuote(i)">Like</button>
+          </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10">
-        <hr>
-        <div  class="myQuote"*ngFor="let quote of quotes; let i=index">
-          <p appHighlight *ngIf="highestUpvote()===quote.upvotes && quote.upvotes>0">{{quote.quote}}</p>
-          <p  *ngIf="highestUpvote()!==quote.upvotes || quote.upvotes===0">{{quote.quote}}</p>
-          <app-details [quote]="quote"></app-details>
+          <div class="col-md-3">
+            <button class="btn btn-outline-danger" (click)="downvoteQuote(i)">Dislike</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="toggleDetails(i)">Details</button>
 
-          <!-- <hr size="50"> -->
-
-
-          <button class="btn btn-primary" (click)="upvote(i)">Upvote</button>
-          <button class="btn" (click)="downvote(i)">Downvote</button>
-          <button class="btn btn-danger" (click)="delQuote(i)">Delete</button>
-
-          <hr>
-
+        <div>
+          <app-quote-details
+            *ngIf="quote.showDescription"
+            [quote]="quote"
+          ></app-quote-details>
         </div>
       </div>
     </div>
-  </div>
 
-<!-- </div> -->
+    <div class="col-md-6">
+      <app-quote-form (addQuote)="addNewQuote($event)"></app-quote-form>
+    </div>
+  </div>
+</div>
