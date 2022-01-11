@@ -22,10 +22,10 @@
         <button class="btn btn-primary" (click)="toggleDetails(i)">Details</button>
 
         <div>
-          <app-quote-details
+          <app-details
             *ngIf="quote.showDescription"
             [quote]="quote"
-          ></app-quote-details>
+          ></app-details>
         </div>
       </div>
     </div>
